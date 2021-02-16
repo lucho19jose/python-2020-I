@@ -1,0 +1,5 @@
+scraping
+mineria de datos
+servidor
+aplicaciones de consola no, pero a gran escala puede ser en web
+​Spoiler de la vida: al final te mueres, y Java sigue siendo top 3.

@@ -1,0 +1,59 @@
+CREATE TABLE patient(
+	id_patient int AUTO_INCREMENT,
+	dni int NOT NULL,
+	last_name TEXT NOT NULL,
+	first_name TEXT NOT NUll,
+	age int,
+	direction TEXT,
+	symptoms TEXT,
+	PRIMARY KEY (id_patient)
+)
+CREATE TABLE result(
+	id_result int AUTO_INCREMENT,
+	value TEXT,
+	PRIMARY KEY (id_result)
+)
+CREATE TABLE proof(
+	id_proof int AUTO_INCREMENT,
+	type TEXT NOT NULL,
+	location TEXT,
+	date_proof TEXT NOT NULL,
+	date_result TEXT,
+	fk_result int,
+	PRIMARY KEY (id_proof),
+	FOREIGN KEY(fk_result) REFERENCES result (id_result)
+)
+CREATE TABLE patient_proof(
+	id_patient1 int,
+	id_proof1 int,
+	FOREIGN KEY (id_patient1) REFERENCES patient(id_patient),
+	FOREIGN KEY (id_proof1) REFERENCES proof(id_proof)
+)
+
+
+----------------filling the table patient----------------------------
+INSERT INTO patient VALUES(1,70669185, "Hermoza", "Maria", 25, "JR. Marias","he doesn't have any symptoms")
+INSERT INTO patient VALUES(2,70648985, "Juarez", "Koko", 55, "JR. Lucas","he doesn't have any symptoms");
+INSERT INTO patient VALUES(3,7061475, "Hermoza", "Lulu", 28, "JR. Marias","fever and the flu")
+
+----------------filling the table result----------------------------
+INSERT INTO result VALUES(1,"POSITIVE");
+INSERT INTO result VALUES(2,"NEGATIVE");
+INSERT INTO result VALUES(3,"LACK");
+
+----------------filling the table Proof ----------------------------
+INSERT INTO proof VALUES(1,"molecular", "Andahuaylas", "05/05/20","",3);
+INSERT INTO proof VALUES(2,"rapida", "Andahuaylas", "05/05/20","14/05/20",2);
+INSERT INTO proof VALUES(3,"molecular", "Andahuaylas", "05/05/20","11/05/20",1);
+
+----------------filling the table patient_proof ----------------------------
+INSERT INTO patient_proof VALUES(1,1);
+INSERT INTO patient_proof VALUES(2,2);
+INSERT INTO patient_proof VALUES(2,2);
+
+
+QUERYS:
+
+SELECT first_name, last_name, type, date_proof, value FROM patient INNER JOIN patient_proof ON id_patient=id_patient1
+ INNER JOIN proof ON id_proof1 = id_proof INNER JOIN result ON fk_result = id_result
+
